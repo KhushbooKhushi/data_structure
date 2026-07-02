@@ -1,0 +1,28 @@
+/* | 01.07.2026    | *2235*   | Add Two Integers   */
+
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+int add(int a, int b){
+    //return a+b;
+    
+    if(b>=0){
+        while(--b){
+            a++;
+        }
+    }
+    else{
+        while(b++){
+            a--;
+        }
+    }
+    return a;
+}
+int main() {
+     
+     int result = add(5,6);
+     cout<<result;
+
+    return 0;
+}
