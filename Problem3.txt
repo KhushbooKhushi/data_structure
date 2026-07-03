@@ -9,3 +9,16 @@ public:
             return n*2;
     }
 };
+
+Using bitwise operator
+
+if(n & 1)
+	return n<<1;
+return n;
+
+
+
+
+n << k = n * 2^k
+
+n >> k = n / (2^k)
