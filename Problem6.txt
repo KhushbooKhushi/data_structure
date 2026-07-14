@@ -1,0 +1,56 @@
+/* 412. Fizz Buzz */
+
+class Solution {
+public:
+    vector<string> fizzBuzz(int n) {
+        vector<string> str ;
+
+        for(int i=1;i<=n;i++){
+            // if(i%3 == 0 && i%5 == 0){
+            if(i%15 == 0){
+                str.push_back("FizzBuzz");
+            }else if(i%3 ==0){
+                str.push_back("Fizz");
+            }else if(i%5 ==0){
+                str.push_back("Buzz");
+            }
+            else{
+                str.push_back(to_string(i));
+            }
+        }
+        return str;
+    }
+};
+
+
+
+
+//Without % operator
+
+class Solution {
+public:
+    vector<string> fizzBuzz(int n) {
+        vector<string> str ;
+        int fizz=0, buzz=0;
+        
+        for(int i=1;i<=n;i++){
+            fizz++;
+            buzz++;
+            string s="";
+            if(fizz==3){
+                s="Fizz";
+                fizz=0;
+            }
+            if(buzz==5){
+                s+="Buzz";
+                buzz=0;
+            }
+            if(s=="")
+                s=to_string(i);
+            
+            str.push_back(s);
+        }   
+        return str;
+    }
+};
+
