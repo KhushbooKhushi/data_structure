@@ -1,0 +1,84 @@
+/* 09 Palindrome Number */
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+	 if(x < 0)
+            return false;
+
+        string s = to_string(x);
+        int i=0;
+        int j = s.length()-1;
+        while(i<j){
+            if(s[i] != s[j])
+                return false;
+            i++;j--;
+        };
+        return true;
+    }
+};
+
+
+
+
+/* Extract digit using divisor */
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        
+        if(x<0)
+            return false;
+        
+        int div=1;
+        while(x/div >=10)
+            div*=10;
+
+        int first_digit=1, last_digit=1;
+
+        while(x>0){
+
+             first_digit = x/div ;
+             last_digit = x%10;
+
+            if(first_digit != last_digit)
+                return false;
+
+            x = (x%div)/10;
+            div /= 100;
+             
+        }
+        return true;
+    }
+};
+
+
+
+
+
+
+/* reverse entire number then check */
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        
+        if(x<0)
+            return false;
+        
+        long long no = x;
+
+        long long rev =0;
+
+        while (no>0){
+            rev = rev * 10 + no % 10;
+            no = no/10;
+        }
+        return (x == rev);
+    }
+};
+
+
+
+
+
