@@ -1,0 +1,60 @@
+/* 202 Happy Number */
+
+class Solution {
+public:
+    int getNext(int n){
+        int sum=0, digit=0;
+        while(n>0){
+            digit = n%10;
+            sum+=digit * digit;
+            n = n/10;
+        }
+        return sum;
+    }
+    bool isHappy(int n) {
+       
+        unordered_set<int> visited;
+
+        while(n != 1 && !visited.count(n)){
+            visited.insert(n);
+            n = getNext(n);
+        }
+        if(n ==1)
+            return true;
+        return false;
+    }
+};
+
+
+
+/* Floyd's Cycle Detection (Fast & Slow Pointer) */
+
+class Solution {
+public:
+    int getNext(int n){
+        int sum=0, digit=0;
+        while(n>0){
+            digit = n%10;
+            sum+=digit * digit;
+            n = n/10;
+        }
+        return sum;
+    }
+    bool isHappy(int n) {
+       int fast =n, slow=n;
+
+        if(n==1)
+            return true;
+    
+        do{
+            slow = getNext(slow);
+            fast = getNext(getNext(fast));
+        }
+        while(slow != fast);
+
+        if(slow == 1)
+            return true;
+        else
+            return false;
+    }
+};
