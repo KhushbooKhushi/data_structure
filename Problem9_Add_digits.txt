@@ -1,0 +1,45 @@
+/* 258. Add Digits */
+
+class Solution {
+public:
+    int digitSum(int num){
+        int sum =0,digit=0;
+        while(num >0){
+            digit = num%10;
+            sum+=digit;
+            num = num/10;
+        }
+        return sum;
+    }
+    int addDigits(int num) {
+        while(num>9){
+            num = digitSum(num);
+        }
+        return num;
+    }
+};
+
+
+/* to_string 
+c-'0' here c is not integer it's character, and internally characters are stored using ASCII values
+if c='7' which ascii values is 55 and '0' ascii value is 48 so internally 55 - 48 converted to integer 7
+*/
+
+class Solution {
+public:
+    int digitSum(int num){
+       
+       int sum=0;
+       string s = to_string(num);
+
+       for(char c:s)
+            sum+=c-'0';
+        return sum;
+    }
+    int addDigits(int num) {
+        while(num>9){
+            num = digitSum(num);
+        }
+        return num;
+    }
+};
