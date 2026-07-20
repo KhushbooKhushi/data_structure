@@ -1,0 +1,55 @@
+/* this solution gives run time overflow error
+
+Line 7: Char 28: runtime error: signed integer overflow: 9 * 1000000000 cannot be represented in type 'int' (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:16:28
+
+*/
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+         int sum = 0;int div=1;
+          vector<int>  newDigits;
+          for(int i=digits.size()-1;i>=0;i--){
+            sum+= digits[i]*div;
+            div*=10;
+          }
+
+          sum+=1;
+         
+
+             string ss = to_string(sum);
+             for(auto c :ss){
+                  newDigits.push_back(c-'0');
+             }
+
+         
+
+          return newDigits;
+    }
+};
+
+/*correct answer */
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        vector<int> vec ;
+        int carry =0;   
+        for(int i=digits.size()-1;i>=0;i--){
+            
+            if(digits[i]>8){
+                carry=1;
+                digits[i]=0;
+            }
+            else
+            {
+                digits[i]=1+digits[i];
+                return digits;
+            }
+             
+        }   
+         digits.insert(digits.begin(), 1);
+        return digits;
+    }
+};

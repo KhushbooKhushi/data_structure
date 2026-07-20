@@ -1,0 +1,29 @@
+/* 1480. Running Sum of 1d Array */
+
+class Solution {
+public:
+    vector<int> runningSum(vector<int>& nums) {
+        for(int i=1;i<nums.size();i++){
+            nums[i] = nums[i]+nums[i-1];
+        }
+        return nums;
+    }
+};
+
+
+/* using recursion */
+
+class Solution {
+public:
+    void solve(vector<int>& nums,int idx){
+        if(idx == 0)
+            return;
+        solve(nums,idx-1);
+
+        nums[idx] += nums[idx-1];
+    }
+    vector<int> runningSum(vector<int>& nums) {
+        solve(nums,nums.size()-1);
+        return nums; 
+    }
+};
