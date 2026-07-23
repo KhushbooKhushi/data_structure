@@ -1,0 +1,25 @@
+/* 977. Squares of a Sorted Array */
+
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+      int pos=nums.size()-1;int first=0, last=nums.size()-1;
+     vector<int> nums2(nums.size());
+      while(first<=last)
+      {
+            int fsquare = nums[first]*nums[first];
+            int lsquare = nums[last] * nums[last];
+
+            if(fsquare >= lsquare){
+                nums2[pos] = fsquare;
+                first++;
+            }else{
+                nums2[pos] = lsquare;
+                last--;
+            }
+            pos--;
+      }
+
+    return nums2;
+    }
+};
