@@ -1,0 +1,49 @@
+/* Find Numbers with Even Number of Digits */
+
+class Solution {
+public:
+    bool isDigitEven(int no){
+        int cnt=0;
+        string ss = to_string(no);
+
+        for(char c : ss){
+            cnt++;
+        }
+
+        if(cnt%2==0)
+            return true;
+        else
+            return false;
+    }
+    int findNumbers(vector<int>& nums) {
+        int count=0;
+
+        for(int i=0;i<nums.size();i++){
+            if(isDigitEven(nums[i]))
+                count++;
+        }
+
+        return count;
+    }
+};
+
+
+
+
+Solution 2:
+
+class Solution {
+public:
+    int findNumbers(vector<int>& nums) {
+        int count = 0;
+
+        for (int i = 0; i < nums.size(); i++) {
+            string ss = to_string(nums[i]);
+
+            if (ss.size() % 2 == 0)
+                count++;
+        }
+
+        return count;
+    }
+};

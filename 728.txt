@@ -1,0 +1,66 @@
+class Solution {
+public:
+    bool isSelfDividing(int no){
+
+        int no_old = no;
+
+        while(no!=0 && no%10 !=0){
+            if(no_old % (no%10) != 0)
+                return false;
+
+            no = no/10;
+        }
+
+        if(no>0)
+            return false;
+        return true;
+    }
+    vector<int> selfDividingNumbers(int left, int right) {
+        
+        vector<int> selfDividingNo;
+
+        while(left<=right)
+        {
+            if(isSelfDividing(left))
+                selfDividingNo.push_back(left);
+            left++;
+        }
+
+        return selfDividingNo;
+    }
+};
+
+
+
+/* Recursive Approach */
+
+class Solution {
+public:
+    int isSelfDividing(int no, int new_no){
+        if(new_no == 0)
+            return 1;
+
+        int digit = new_no%10;
+
+        if(digit==0)
+            return 0;
+        
+        if(no%digit ==0)
+            return 1 * isSelfDividing(no,new_no/10);
+        else
+            return 0;
+    }
+    vector<int> selfDividingNumbers(int left, int right) {
+        
+        vector<int> selfDividingNo;
+
+        while(left<=right)
+        {
+            if(isSelfDividing(left,left))
+                selfDividingNo.push_back(left);
+            left++;
+        }
+
+        return selfDividingNo;
+    }
+};
