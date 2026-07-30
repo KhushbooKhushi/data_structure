@@ -1,0 +1,15 @@
+class Solution {
+  public:
+    void reverseArray(vector<int> &arr) {
+        // code here
+        int first=0, last=arr.size()-1;
+        
+        while(first<last){
+            
+            swap(arr[first],arr[last]);
+            
+            first++;
+            last--;
+        }
+    }
+};
