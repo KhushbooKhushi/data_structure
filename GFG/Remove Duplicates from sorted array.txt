@@ -1,0 +1,20 @@
+/* https://www.geeksforgeeks.org/problems/remove-duplicate-elements-from-sorted-array/1 */
+
+class Solution {
+  public:
+    vector<int> removeDuplicates(vector<int> &arr) {
+        // code here
+        vector<int> uniqueElements;
+        int j=0;
+         uniqueElements.push_back(arr[j]);
+        for(int i=1;i<arr.size();i++){
+            
+            if(uniqueElements[j]==arr[i])
+                continue;
+            
+            uniqueElements.push_back(arr[i]);
+            j++;
+        }
+        return uniqueElements;
+    }
+};
