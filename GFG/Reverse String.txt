@@ -1,0 +1,16 @@
+/* https://www.geeksforgeeks.org/problems/reverse-a-string/1 */
+
+class Solution {
+  public:
+    void reverse(string& s, int first,int last){
+        if(first>=last)
+            return;
+        
+        swap(s[first],s[last]);
+        reverse(s,++first,--last);
+    }
+    string reverseString(string& s) {
+        reverse(s,0,s.length()-1);
+        return s;
+    }
+};
