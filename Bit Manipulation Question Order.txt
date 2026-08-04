@@ -1,0 +1,33 @@
+Best order for learning
+Basics
+	67
+190
+191
+231
+342
+XOR Pattern
+136
+268
+389
+1486
+1720
+1734
+2425
+3158
+Bit Counting
+338
+461
+762
+1342
+1356
+2220
+2859
+Bit Masking
+1684
+1863
+Bit Tricks
+405
+476
+693
+1009
+401
