@@ -1,6 +1,27 @@
 /* 1365. How Many Numbers Are Smaller Than the Current Number */
 
 
+/* Brute Force */
+
+class Solution {
+public:
+ vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<int> ans(n,0);
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(nums[j]<nums[i])
+                    ans[i]++;
+            }
+        }
+
+        return ans;
+    }  
+};
+
+
 class Solution {
 public:
     vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
@@ -52,28 +73,37 @@ public:
 };
 
 
-Solution 3:
+/* Sort and hashmap */
 
 class Solution {
 public:
  vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
         
+        unordered_map<int,int> sortedNums;
+        vector<int> sorted = nums;
+        sort(sorted.begin(),sorted.end());
         vector<int> ans;
-        sort(nums.begin(),nums.end());
-        
         int cnt=0;
-        for(int i=0;i<nums.size();i++){
+        for(int i=0;i<sorted.size();i++){
             
-            if(i>0 && (nums[i-1] == nums[i])){
+            if(i>0 && (sorted[i-1] == sorted[i])){
                 cnt++;
-                ans.push_back(i-cnt);
+                sortedNums.insert({sorted[i],(i-cnt)});
             }    
             else
             {
-                ans.push_back(i);
+                sortedNums.insert({sorted[i],i});
                 cnt=0;
             }
         }
+
+        //insert into ans vector
+        for(auto n: nums)
+            ans.push_back(sortedNums[n]);
+
+
+
         return ans;
     }  
 };
+
