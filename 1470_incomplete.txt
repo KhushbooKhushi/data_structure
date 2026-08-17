@@ -1,1 +1,40 @@
 /* 1929, 1431, 1920, and 1365. */
+
+/* Shuffle the array */
+
+class Solution {
+public:
+    vector<int> shuffle(vector<int>& nums, int n) {
+        
+        vector<int> nums2;
+
+        for(int i=0;i<n;i++){
+            nums2.push_back(nums[i]);
+            nums2.push_back(nums[i+n]);
+        }
+
+        return nums2;
+    }
+};
+
+
+/* Recursive Approach */
+
+class Solution {
+public:
+    void suff(vector<int>& nums, int i,int n, vector<int>& result){
+        if(i == n)
+            return;
+        
+        result.push_back(nums[i]);
+        result.push_back(nums[i+n]);
+        
+        return suff(nums,++i,n,result);
+    }
+    vector<int> shuffle(vector<int>& nums, int n) {
+        
+        vector<int> nums2;
+        suff(nums,0,n,nums2);
+        return nums2;
+    }
+};
