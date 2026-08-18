@@ -1,0 +1,89 @@
+/* 231 Power of Two */
+
+/* A positive power of 2 has exactly one 1 bit in its binary representation. */
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+
+        if(n<=0)
+            return false;
+        int cnt=0;
+        while(n!=0){
+            if(n & 1)
+                cnt++;
+
+            if(cnt>1)
+                return false;
+            n = n>>1;
+        }
+            return true;
+    }
+};
+
+/* Solution 2 */
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        while(n!=0)
+        {
+            if(n%2 ==0)
+                n = n/2;
+            else
+                break;
+        }
+
+        return (n == 1);
+    }
+};
+
+
+/* Solution 3 */
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        long pow=1;
+        while(pow < n){
+            pow = pow * 2;
+        }
+        return (pow == n);
+    }
+};
+
+/* Using LOG */
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n<=0)
+            return false; 
+        double result = log2(n);
+
+        return (result  == floor(result));
+    }
+};
+
+
+/* bitwise  n & (n-1) */
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n<=0)
+            return false; 
+        
+        return ((n & (n-1) )== 0);
+    }
+};
+
+
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        return ( n>0 && (n & (n-1) )== 0);
+    }
+};
+
