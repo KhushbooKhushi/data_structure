@@ -1,0 +1,26 @@
+/* 338 Counting Bits */
+
+class Solution {
+public:
+    int count(int n){
+        int cnt=0;
+
+    for(int i=0;i<32;i++){
+        if(n & 1)
+        {
+            cnt++;
+           
+        }
+         n=n>>1;
+    }
+    return cnt;
+        
+    }
+    vector<int> countBits(int n) {
+        vector<int> list;
+        for(int i=0;i<=n;i++){
+            list.push_back(count(i));
+        }
+        return list;
+    }
+};
