@@ -1,0 +1,107 @@
+/* Find the XOR of Numbers which appear twice */
+
+/* Solution 1 -Brute Force Frequency array */
+
+class Solution {
+public:
+    int duplicateNumbersXOR(vector<int>& nums) {
+        int freq[51]={0};
+
+        for(int i=0;i<nums.size();i++){
+            freq[nums[i]]++;
+        }
+
+        int result =0;
+        for(int i=0;i<51;i++){
+            if(freq[i]==2){
+                result = result^i;
+            }
+        }
+
+        return result;
+    }
+};
+
+/* Solution 2 - Sorting */
+
+class Solution {
+public:
+    int duplicateNumbersXOR(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int ans=0;
+        for(int i=0;i<nums.size()-1;i++){
+            if(nums[i] == nums[i+1]){
+                ans = ans^nums[i];i++;
+            }
+        }
+        return ans;
+    }
+};
+
+
+
+/* Solution 3: Hash set 
+Time:  O(n) average
+Space: O(n)
+*/
+
+class Solution {
+public:
+    int duplicateNumbersXOR(vector<int>& nums) {
+       unordered_set<int> st;
+       int ans=0;
+
+       for(int i=0;i<nums.size();i++){
+            if(st.count(nums[i]))
+            {
+                ans = ans ^ nums[i];
+            }else{
+                st.insert(nums[i]);
+            }
+       }
+       return ans;
+    }
+};
+
+
+/* Solution 4: Hash map */
+
+class Solution {
+public:
+    int duplicateNumbersXOR(vector<int>& nums) {
+        unordered_map<int,int> freq;
+        int ans=0;
+        for(int n:nums){
+            freq[n]++;
+        }
+
+        for(auto n:freq){
+            if(n.second == 2){
+                ans = ans ^ n.first;
+            }
+        }
+        return ans;
+    }
+};
+
+
+/* Solution 5: Bitmask Solution, every bit represents a number count */
+
+class Solution {
+public:
+    int duplicateNumbersXOR(vector<int>& nums) {
+        long long seen=0;
+        int ans =0;
+
+        for(int i=0;i<nums.size();i++){
+             //if number bit is seen check
+             if(seen & (1LL <<nums[i])){
+                ans = ans ^ nums[i];
+             }
+             else{
+                seen = seen | 1LL <<nums[i];
+             }
+        }
+        return ans;
+    }
+};

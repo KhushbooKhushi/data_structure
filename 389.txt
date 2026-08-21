@@ -1,0 +1,18 @@
+/* Find the difference */
+
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        int ans=0;
+
+        for(char a : s){
+            ans=ans^a;
+        }
+
+        for(char b:t){
+            ans = ans^b;
+        }
+
+        return (char)ans;
+    }
+};
