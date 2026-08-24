@@ -16,7 +16,7 @@ XOR Pattern
 	3158
 Bit Counting
 	338
-461
+	461
 762
 1342
 1356

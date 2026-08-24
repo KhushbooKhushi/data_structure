@@ -1,0 +1,77 @@
+/* Hamming Distance */
+
+
+/* Solution 1: Brute force compare each bit */
+
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int cnt=0;
+        for(int i=0;i<32;i++){
+            if((x & 1) != (y & 1))
+                cnt++;
+            
+            x = x>>1;
+            y = y>>1;
+        }
+        return cnt;
+    }
+};
+
+
+/* Solution 2: 
+Number of different positions
+=
+Number of 1s in x ^ y
+*/
+
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int n = x ^ y;
+        int cnt=0;
+        while(n>0){
+            if(n & 1 )
+                cnt++;
+
+            n = n>>1;
+        }
+        return cnt;
+    }
+};
+
+
+
+/* Solution 3:
+
+(n & (n-1)) Brian Kernighan's Algorithm
+
+*/
+
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int n = x ^ y;
+        int cnt=0;
+        while(n>0){
+	    // Remove the rightmost 1 bit
+             n = (n & (n-1));
+             cnt++;
+        }
+        return cnt;
+    }
+};
+
+
+/* __builtin_popcount(n) 
+
+it returns the number of set bits (1 s) in an integer
+
+*/
+
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        return __builtin_popcount(x ^ y);
+    }
+};
