@@ -1,5 +1,13 @@
 /* 338 Counting Bits */
 
+/* remove the rightmost 1: ans[i] = ans[i & (i - 1)] + 1;
+
+   remove the last binary bit : ans[i] = ans[i >> 1] + (i & 1);
+  
+   find the rightmost 1, them remove it : ans[i] = ans[i - (i & -i)] + 1;
+*/
+
+
 class Solution {
 public:
     int count(int n){
@@ -24,3 +32,111 @@ public:
         return list;
     }
 };
+
+
+/* Solution 2: Using Brian Kernighan’s Algorithm*/
+
+class Solution {
+public:
+    int count(int n){
+        int cnt=0;
+
+        while(n>0){
+            cnt++;
+            n = n & (n-1); //removes the rightmost set bit.
+        }
+    return cnt;
+        
+    }
+    vector<int> countBits(int n) {
+        vector<int> list;
+        for(int i=0;i<=n;i++){
+            list.push_back(count(i));
+        }
+        return list;
+    }
+};
+
+
+/* Solution 3: Dynamic Programming Using i & (i - 1) */
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+
+        for(int i=1;i<=n;i++){
+            //ans[i]=(ans[i>>1]) + (i & 1);
+            ans[i] = (ans[(i & (i-1))] + 1);
+        }
+        return ans;
+    }
+};
+
+
+
+
+
+/* Solution 4: Dynamic Programming Using i / 2 and i % 2 */
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+
+        for(int i=1;i<=n;i++){
+            //ans[i]=(ans[i>>1]) + (i & 1);
+            //ans[i] = (ans[(i & (i-1))] + 1);
+            ans[i] = (ans[i/2] + i%2);
+        }
+        return ans;
+    }
+};
+
+
+/*Solution 5: Dynamic Programming Using Right Shift and Bitwise AND */
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+        for(int i=0;i<=n;i++){
+            ans[i]=(ans[i>>1]) + (i & 1);
+        }
+        return ans;
+    }
+};
+
+
+/* Solution 6 : DP Using the Highest Power of 2 */
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+        int pow=1;
+        for(int i=1;i<=n;i++){
+            if(i == pow * 2){
+                pow = pow *2;
+            }
+
+            ans[i] = ans[i - pow] + 1;
+        }
+        return ans;
+    }
+};
+
+/* Solution 7: Find the rightmost 1 bit, remove it, and reuse the answer of the remaining number. */
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+        int pow=1;
+        for(int i=1;i<=n;i++){
+            ans[i] = ans[i - (i & -i)]+1;
+        }
+        return ans;
+    }
+};
+
