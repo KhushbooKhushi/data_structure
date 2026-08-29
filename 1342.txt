@@ -1,0 +1,56 @@
+/* 1342 Number of Steps to Reduce a number to 0 */
+
+class Solution {
+public:
+    int numberOfSteps(int num) {
+        int cnt=0;
+        while(num>0){
+            cnt++;
+            if(num % 2 ==0)
+            {
+                num = num>>1;
+            }   
+            else{
+                num = num -1;
+            }
+        }
+        return cnt;
+    }
+};
+
+
+/* Solution 2 */
+
+class Solution {
+public:
+    int numberOfSteps(int num) {
+        int cnt=0;
+        while(num>0){
+            cnt++;
+            if(num & 1)
+            {
+                num = num -1;
+            }   
+            else{
+                num = num>>1;
+            }
+        }
+        return cnt;
+    }
+};
+
+
+/* Solution 3 : Recursion*/
+
+class Solution {
+public:
+    int numberOfSteps(int num) {
+        if(num ==0)
+            return 0;
+
+        else if(num & 1)
+            return 1 + numberOfSteps(num -1);
+        else 
+            return 1 + numberOfSteps(num>>1);
+    }
+};
