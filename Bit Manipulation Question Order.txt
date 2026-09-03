@@ -19,7 +19,7 @@ Bit Counting
 	461
 	762
 	1342
-1356
+	1356
 2220
 2859
 Bit Masking

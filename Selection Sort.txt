@@ -1,0 +1,15 @@
+class Solution {
+  public:
+    void selectionSort(vector<int> &arr) {
+        for(int i=0;i<arr.size();i++){
+            int sorted_idx = i;
+            
+            for(int j=i+1;j<arr.size();j++){
+                if(arr[sorted_idx] > arr[j]){
+                    sorted_idx = j;
+                }
+            }
+            swap(arr[i],arr[sorted_idx]);
+        }
+    }
+};
