@@ -1,0 +1,105 @@
+/* Sort Integers by The Number of 1 Bits */
+
+/* Solution 1: Brute Force */
+
+
+class Solution {
+public:
+    int setBitCount(int n){
+        int cnt=0;
+        while(n>0){
+            cnt++;
+            n = n & (n-1);
+        }
+        return cnt;
+    }
+    vector<int> sortByBits(vector<int>& arr) {
+        for(int i=0;i<arr.size();i++){
+            for(int j=0;j<arr.size()-(i+1);j++){
+                if(setBitCount(arr[j]) > setBitCount(arr[j+1])){
+                    swap(arr[j],arr[j+1]);
+                }else if(setBitCount(arr[j])== setBitCount(arr[j+1])){
+                    if(arr[j]>arr[j+1])
+                        swap(arr[j],arr[j+1]);
+                }
+            }
+        }
+        return arr;
+    }
+};
+
+
+/* Solution 2: Builtinpopcount function */
+
+class Solution {
+public:
+    vector<int> sortByBits(vector<int>& arr) {
+        for(int i=0;i<arr.size();i++){
+            for(int j=0;j<arr.size()-(i+1);j++){
+                if(__builtin_popcount(arr[j]) > __builtin_popcount(arr[j+1])){
+                    swap(arr[j],arr[j+1]);
+                }else if(__builtin_popcount(arr[j])== __builtin_popcount(arr[j+1])){
+                    if(arr[j]>arr[j+1])
+                        swap(arr[j],arr[j+1]);
+                }
+            }
+        }
+        return arr;
+    }
+};
+
+
+/* Solution 3 */
+
+/*
+ Because C++ pair sorting follows this rule:
+	1. Compare .first
+	2. If .first is equal, compare .second
+
+*/
+
+class Solution {
+public:
+    vector<int> sortByBits(vector<int>& arr) {
+        
+        vector<pair<int,int>> temp;
+        
+        //store bit count
+        for(int i=0;i<arr.size();i++){
+            int bit = __builtin_popcount(arr[i]);
+            temp.push_back({bit,arr[i]});
+        }
+
+        sort(temp.begin(),temp.end());
+
+
+        //restore result
+        for(int i=0;i<arr.size();i++)
+            arr[i] = temp[i].second;
+
+        return arr;
+    }
+};
+
+
+/* Solution 4: */
+
+class Solution {
+public:
+    vector<int> sortByBits(vector<int>& arr) {
+        
+        //encode number and bit count
+        for(int i=0;i<arr.size();i++){
+           arr[i] = __builtin_popcount(arr[i])<<14 | arr[i] ;
+        }
+
+        sort(arr.begin(),arr.end());
+
+        //decode 
+        for(int i=0;i<arr.size();i++){
+            arr[i] = arr[i] & ((1<<14) - 1);
+        }
+
+         return arr;
+    }
+};
