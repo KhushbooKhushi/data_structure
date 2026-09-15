@@ -1,0 +1,79 @@
+/* 169 Majority Element */
+
+/* Solution 1: */
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        unordered_map<int,int> freq ;
+
+        for(int num : nums){
+            freq[num]++;
+
+            if(freq[num] > nums.size()/2)
+                return num;
+        }
+        return -1;
+    }
+};
+
+
+
+/* Solution 2: Sorting — Majority Element Becomes the Middle Element
+
+Time: O(n log n) 
+
+*/
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+
+        return nums[nums.size()/2];
+    }
+};
+
+
+/* Solution 3: Boyer-Moore Voting 
+
+The majority element has more occurrences than all other elements combined, so it can survive a process of cancelling different elements against each other.
+
+After cancelling every possible pair of:
+
+majority element + different element
+
+the majority element still has at least one occurrence left.
+
+That's why it survives the voting process.
+
+*/
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int candidate=0,count=0;
+        for(int i=0;i<nums.size();i++){
+            if(count==0)
+            {
+                candidate = nums[i];
+            }
+
+            if(nums[i] == candidate)
+                count++;
+            else
+                count--;
+        }
+        return candidate;
+    }
+};
+
+
+
+/* Solution 4: Ramdom
+
+Probability of picking majority > 50%
+
+*/
+
+Time limit exceed
