@@ -1,0 +1,113 @@
+/* 724 Find Pivot Index */
+
+/* Solution 1: Brute Force */
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int n = nums.size();
+        int left_idx =0, left_sum=0,right_sum=0;
+
+        while(left_idx < n){
+           for(int i=0;i<left_idx;i++){
+                left_sum+=nums[i];
+           }
+           for(int i=n-1;i>left_idx;i--){
+                right_sum+=nums[i];
+           }
+
+           
+           if(left_sum == right_sum)
+                return left_idx;
+
+           left_idx++;
+           right_sum=0;
+           left_sum=0;
+        }
+        return -1;
+    }
+};
+
+
+/* Solution 2: */
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int n = nums.size();
+        int left_idx =0, right_idx = n-1,left_sum=0,right_sum=0;
+        vector<int> left_arr(n,0);
+        vector<int> right_arr(n,0);
+        for(int i=1;i<n;i++){
+            right_sum += nums[i];
+            left_arr[i] = left_arr[i-1] + nums[i-1];
+        }
+        right_arr[0] = right_sum;
+        for(int i=1;i<n;i++){
+            right_arr[i] = right_arr[i-1] - nums[i];
+        }
+
+        for(int i=0;i<n;i++){
+            if(left_arr[i] == right_arr[i])
+                return i;
+        }
+        return -1;
+    }
+};
+
+
+/* Solution 3: Right Sum = Total Sum - Left Sum - nums[i] */
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int n = nums.size();
+        int left_idx =0, right_idx = n-1,left_sum=0,right_sum=nums[0];
+        vector<int> left_arr(n,0);
+        vector<int> right_arr(n,0);
+        for(int i=1;i<n;i++){
+            right_sum += nums[i];
+            left_arr[i] = left_arr[i-1] + nums[i-1];
+        }
+        // right_arr[0] = right_sum;
+        // for(int i=1;i<n;i++){
+        //     if(left_arr[i] == (right_sum - nums[i]))
+        // }
+
+        for(int i=0;i<n;i++){
+            if(left_arr[i] ==  (right_sum - nums[i] - left_arr[i]))
+                return i;
+        }
+        return -1;
+    }
+};
+
+
+/* Solution 4: 
+
+LEFT = RIGHT
+TOTAL = LEFT + CURRENT + RIGHT
+TOTAL = LEFT + CURRENT + LEFT
+TOTAL = 2 × LEFT + CURRENT
+
+*/
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int n = nums.size();
+        int total_sum = 0,left_sum=0;
+        
+        for(int i=0;i<n;i++){
+            total_sum += nums[i];
+        }
+
+        for(int i=0;i<n;i++){
+            if(total_sum == (2 * left_sum + nums[i]))
+                return i;
+            left_sum+=nums[i];
+        }
+
+        return -1;
+    }
+};
