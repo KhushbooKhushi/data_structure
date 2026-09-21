@@ -1,0 +1,87 @@
+/* Valid Mountain Array */
+
+
+class Solution {
+public:
+    bool validMountainArray(vector<int>& arr) {
+        bool is_increasing=true;
+        if(arr.size()<3)
+            return false;
+
+        for(int i=0;i<arr.size()-1;i++){
+            if(arr[i+1]<arr[i] && i>0)
+                is_increasing =false;
+            else if(arr[i+1] == arr[i])
+                return false;
+
+            if(is_increasing && arr[i+1]<arr[i]){
+                return false;
+            }else  if(!is_increasing && arr[i+1]>arr[i]){
+                return false;
+            }
+        }
+        return is_increasing?false:true;
+    }
+};
+
+
+
+
+/* Solution 2: Two Pointers */
+
+class Solution {
+public:
+    bool validMountainArray(vector<int>& arr) {
+       int left=0, right=arr.size()-1;
+        if(arr.size() <3)
+            return false;
+        
+       for(int i=0;i<arr.size()-1;i++){
+            if(arr[i]<arr[i+1])
+                left++;
+       }
+       for(int i=arr.size()-1;i>left;i--){
+            if(arr[i-1]>arr[i])
+                right--;
+       }
+
+       if((left >0 and right<arr.size()-1 ) && (left == right))
+            return true;
+        else
+            return false;
+    }
+};
+
+
+/* Solution 3: */
+
+class Solution {
+public:
+    bool validMountainArray(vector<int>& arr) {
+        int n = arr.size();
+
+        if (n < 3) {
+            return false;
+        }
+
+        bool increasing = false;
+        bool decreasing = false;
+
+         for(int i=0;i<n-1;i++){
+            if(arr[i] == arr[i+1])
+                return false;
+            if(arr[i]<arr[i+1])
+            {
+                if(decreasing)
+                    return false;
+
+                increasing = true;
+            }else{
+                decreasing = true;
+            }
+         }
+
+        // Both increasing and decreasing portions must exist
+        return increasing && decreasing;
+    }
+};
